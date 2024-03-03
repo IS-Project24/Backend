@@ -1,6 +1,6 @@
 # IS Project Backend
 
-Welcome to the IS Project Backend repository! This repository serves as the backend component for the IS (Intelligent Systems) Project, focusing on EV (Electric Vehicle) monitoring and fault detection, as well as user management functionalities.
+Welcome to the IS Project Backend repository! This repository serves as the backend component for the IS (Information Systems) Project, focusing on EV (Electric Vehicle) monitoring and fault detection, as well as user management functionalities.
 
 ## Objective
 
