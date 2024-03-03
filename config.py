@@ -1,4 +1,6 @@
+import os
+
 # Configuration variables
-SQLALCHEMY_DATABASE_URI = 'mysql://root:123456789@localhost/pmsm_motor_db'
+SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-SECRET_KEY = "mykeyiseproject"
+SECRET_KEY = os.getenv('SECRET_KEY')
