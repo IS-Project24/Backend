@@ -9,7 +9,9 @@ def login():
     userid = data.get('userid')
     vehicleid = data.get('vehicleid')
     password = data.get('password')
-
+    if not userid or not vehicleid or not password:
+        return jsonify({'message': 'Incomplete details provided.'}), 400
+    
     user = User.query.filter_by(userid=userid, vehicleid=vehicleid).first()
 
     if not user:
@@ -32,6 +34,9 @@ def signup():
     email = data.get('email')
     address = data.get('address')
     password = data.get('password')
+
+    if not userid or not vehicleid or not userType or not contactNumber or not email or not address or not password:
+        return jsonify({'message': 'Incomplete details provided.'}), 400
 
     existing_user = User.query.filter((User.userid == userid) | (User.vehicleid == vehicleid)).first()
     if existing_user:
