@@ -3,6 +3,7 @@ from flask import Blueprint
 # Import routes from user_routes and current_data_routes
 from .user_routes import *
 from .current_data_routes import *
+from .vehicle_routes import *
 
 # Define a Blueprint for the routes
 routes = Blueprint('routes', __name__)

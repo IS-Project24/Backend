@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from app import app, bcrypt, db
 from app.models.user import User
+from app.models.vehicle import Vehicle
 import jwt
 
 @app.route("/login", methods=['POST'])
@@ -38,9 +39,9 @@ def signup():
     if not userid or not vehicleid or not userType or not contactNumber or not email or not address or not password:
         return jsonify({'message': 'Incomplete details provided.'}), 400
 
-    existing_user = User.query.filter((User.userid == userid) | (User.vehicleid == vehicleid)).first()
+    existing_user = User.query.filter((User.userid == userid)).first()
     if existing_user:
-        return jsonify({'message': 'User already exists with this userid or vehicleid.'}), 409
+        return jsonify({'message': 'User already exists with this userid.'}), 409
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
@@ -54,7 +55,16 @@ def signup():
         password=hashed_password
     )
 
+    # Create a default vehicle entry for the new user
+    new_vehicle = Vehicle(
+        vehicle_id=vehicleid,
+        user=new_user,  # Associate the vehicle with the new user
+        last_battery_percentage=90,  # Default battery percentage
+        last_health_status=90  # Default health status
+    )
+
     db.session.add(new_user)
+    db.session.add(new_vehicle)
     db.session.commit()
 
     data = {'user': {'id': new_user.id}}
