@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 # Initialize extensions
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 from app.routes import *
 
