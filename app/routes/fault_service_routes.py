@@ -71,7 +71,8 @@ def add_service_history():
 
 @app.route('/service-history/get', methods=['GET'])
 def get_service_history():
-    vehicle_id = request.args.get('vehicle_id')
+    data = request.json
+    vehicle_id = data.get('vehicleid')
     if not vehicle_id:
         return jsonify({'error': 'Missing vehicle_id parameter'}), 400
 
@@ -82,7 +83,7 @@ def get_service_history():
     service_history = ServiceHistory.query.filter_by(vehicle_id=vehicle_id).all()
     service_history_data = [{
         'service_history_id': entry.service_history_id,
-        'vehicleid': entry.vehicleid,
+        'vehicle_id': entry.vehicle_id,
         'description': entry.description,
         'timestamp': entry.timestamp
     } for entry in service_history]
