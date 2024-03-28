@@ -7,13 +7,13 @@ import jwt
 @app.route("/login", methods=['POST'])
 def login():
     data = request.json
-    userid = data.get('userid')
-    vehicleid = data.get('vehicleid')
+    user_id = data.get('userid')
+    vehicle_id = data.get('vehicleid')
     password = data.get('password')
-    if not userid or not vehicleid or not password:
+    if not user_id or not vehicle_id or not password:
         return jsonify({'message': 'Incomplete details provided.'}), 400
     
-    user = User.query.filter_by(userid=userid, vehicleid=vehicleid).first()
+    user = User.query.filter_by(user_id=user_id, vehicle_id=vehicle_id).first()
 
     if not user:
         return jsonify({'message': 'User does not exist.'}), 404
@@ -28,26 +28,26 @@ def login():
 @app.route("/signup", methods=['POST'])
 def signup():
     data = request.json
-    userid = data.get('userid')
-    vehicleid = data.get('vehicleid')
+    user_id = data.get('userid')
+    vehicle_id = data.get('vehicleid')
     userType = data.get('userType')
     contactNumber = data.get('contactNumber')
     email = data.get('email')
     address = data.get('address')
     password = data.get('password')
 
-    if not userid or not vehicleid or not userType or not contactNumber or not email or not address or not password:
+    if not user_id or not vehicle_id or not userType or not contactNumber or not email or not address or not password:
         return jsonify({'message': 'Incomplete details provided.'}), 400
 
-    existing_user = User.query.filter((User.userid == userid)).first()
+    existing_user = User.query.filter((User.user_id == user_id)).first()
     if existing_user:
         return jsonify({'message': 'User already exists with this userid.'}), 409
 
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
     new_user = User(
-        userid=userid, 
-        vehicleid=vehicleid, 
+        user_id=user_id, 
+        vehicle_id=vehicle_id, 
         userType=userType, 
         contactNumber=contactNumber, 
         email=email, 
@@ -57,7 +57,7 @@ def signup():
 
     # Create a default vehicle entry for the new user
     new_vehicle = Vehicle(
-        vehicle_id=vehicleid,
+        vehicle_id=vehicle_id,
         user=new_user,  # Associate the vehicle with the new user
         last_battery_percentage=90,  # Default battery percentage
         last_health_status=90  # Default health status

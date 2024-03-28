@@ -4,6 +4,7 @@ from flask import Blueprint
 from .user_routes import *
 from .current_data_routes import *
 from .vehicle_routes import *
+from .fault_service_routes import *
 
 # Define a Blueprint for the routes
 routes = Blueprint('routes', __name__)
