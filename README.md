@@ -1,62 +1,222 @@
-# IS Project Backend
+Below is a README file outlining the APIs available in the system along with their usage instructions:
 
-Welcome to the IS Project Backend repository! This repository serves as the backend component for the IS (Information Systems) Project, focusing on EV (Electric Vehicle) monitoring and fault detection, as well as user management functionalities.
+---
 
-## Objective
+# API Documentation
 
-The primary objective of the IS Project Backend is to provide a robust and scalable backend system to support the monitoring and management of Electric Vehicles. The key objectives include:
+This document provides information about the APIs available in the system and how to use them.
 
-- **EV Monitoring**: Implementing mechanisms to monitor the status, performance, and health of electric vehicles in real-time.
-- **Fault Detection**: Detecting and analyzing faults or anomalies in electric vehicles to ensure optimal performance and safety.
+## Sign Up
 
-- **User Management**: Providing user authentication, authorization, and management functionalities for system administrators, vehicle owners, and other stakeholders.
+### Description
 
-## Features
+Allows users to sign up and create an account.
 
-- **Real-time EV Monitoring**: The backend system enables real-time monitoring of electric vehicles, capturing key metrics and parameters such as battery level, temperature, and performance indicators.
+### Endpoint
 
-- **Fault Detection Algorithms**: Advanced fault detection algorithms are implemented to analyze data streams from electric vehicles and identify potential issues or anomalies that may require attention.
+POST /signup
 
-- **User Authentication and Authorization**: Robust user authentication and authorization mechanisms are in place to ensure secure access to system functionalities based on user roles and permissions.
+### Request Body
 
-- **Data Persistence and Storage**: The backend system utilizes a reliable database system to persist and manage data related to electric vehicles, user accounts, fault logs, and system configurations.
+```json
+{
+  "userid": "test2",
+  "vehicleid": "hero2",
+  "userType": "Owner",
+  "contactNumber": "1234567890",
+  "email": "test2@test.test",
+  "address": "kgp",
+  "password": "12345678"
+}
+```
 
-## Getting Started
+---
 
-To set up and run the IS Project Backend locally, follow these steps:
+## Login
 
-1. **Clone the Repository**: Clone this repository to your local machine using the following command:
+### Description
 
-   ```
-   git clone https://github.com/your-username/is-project-backend.git
-   ```
+Allows users to log in to their account.
 
-2. **Install Dependencies**: Navigate to the project directory and install the required dependencies using your preferred package manager (e.g., pip):
+### Endpoint
 
-   ```
-   cd is-project-backend
-   pip install -r requirements.txt
-   ```
+POST /login
 
-3. **Database Configuration**: Configure the database connection settings in the configuration files (e.g., `config.py`) as per your environment requirements.
+### Request Body
 
-4. **Run the Application**: Start the backend server by running the main application file (e.g., `app.py` or `run.py`):
+```json
+{
+  "userid": "test",
+  "vehicleid": "hero",
+  "password": "12345678"
+}
+```
 
-   ```
-   python app.py
-   ```
+---
 
-5. **Access the Backend**: Once the server is running, you can access the backend API endpoints using your preferred API testing tool (e.g., Postman) or integrate the backend with frontend applications.
+## Get Current Frequency
 
-## Contribution Guidelines
+### Description
 
-Contributions to the IS Project Backend are welcome! If you have suggestions, bug reports, or would like to contribute new features or enhancements, please follow these guidelines:
+Retrieves the current frequency.
 
-- Fork the repository and create a new branch for your contributions.
-- Ensure that your code follows the project's coding style and conventions.
-- Write clear and concise commit messages.
-- Open a pull request describing your changes and the problem or feature it addresses.
+### Endpoint
 
-## License
+GET qts.iitkgp.ac.in/last/gail/current/5
 
-This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code for your own projects.
+---
+
+## Get Fault History
+
+### Description
+
+Retrieves the fault history for a vehicle.
+
+### Endpoint
+
+GET /fault-history/get
+
+### Request Body
+
+```json
+{
+  "vehicleid": "hero"
+}
+```
+
+---
+
+## Add Fault History
+
+### Description
+
+Adds a fault history entry for a vehicle.
+
+### Endpoint
+
+POST /fault-history/add
+
+### Request Body
+
+```json
+{
+  "vehicleid": "hero",
+  "fault_type_id": "1",
+  "description": "Current Overloaded"
+}
+```
+
+---
+
+## Update Vehicle Data
+
+### Description
+
+Updates battery percentage and health status of a vehicle.
+
+### Endpoint
+
+POST /vehicles/update
+
+### Request Body
+
+```json
+{
+  "vehicle_id": "hero",
+  "battery_percentage": "70",
+  "health_status": "80"
+}
+```
+
+---
+
+## Add Service History
+
+### Description
+
+Adds a service history entry for a vehicle.
+
+### Endpoint
+
+POST /service-history/add
+
+### Request Body
+
+```json
+{
+  "vehicleid": "hero",
+  "description": "Current overloaded repaired"
+}
+```
+
+---
+
+## Get Service History
+
+### Description
+
+Retrieves the service history for a vehicle.
+
+### Endpoint
+
+GET /service-history/get
+
+### Request Body
+
+```json
+{
+  "vehicleid": "hero"
+}
+```
+
+---
+
+## Get Fault History
+
+### Description
+
+Retrieves the fault history for a vehicle.
+
+### Endpoint
+
+GET /fault-history/get
+
+### Request Body
+
+```json
+{
+  "vehicleid": "hero"
+}
+```
+
+---
+
+## Update Vehicle Data
+
+### Description
+
+Updates battery percentage and health status of a vehicle.
+
+### Endpoint
+
+POST /vehicles/update
+
+### Request Body
+
+```json
+{
+  "vehicle_id": "hero",
+  "battery_percentage": "70",
+  "health_status": "80"
+}
+```
+
+---
+
+Ensure to replace `"hero"` and other placeholders with actual values when making requests to the APIs.
+
+---
+
+This README provides a comprehensive guide on how to use the available APIs in the system. If you have any further questions or need assistance, feel free to reach out.
+
+---
