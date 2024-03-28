@@ -24,8 +24,7 @@ def add_fault_history():
 # Get fault history of a vehicle
 @app.route('/fault-history/get', methods=['GET'])
 def get_fault_history():
-    data = request.json
-    vehicle_id = data.get('vehicleid')
+    vehicle_id = request.args.get('vehicleid')
     if not vehicle_id:
         return jsonify({'error': 'Missing vehicle_id parameter'}), 400
 
@@ -71,8 +70,7 @@ def add_service_history():
 
 @app.route('/service-history/get', methods=['GET'])
 def get_service_history():
-    data = request.json
-    vehicle_id = data.get('vehicleid')
+    vehicle_id = request.args.get('vehicleid')
     if not vehicle_id:
         return jsonify({'error': 'Missing vehicle_id parameter'}), 400
 

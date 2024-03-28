@@ -19,9 +19,9 @@ def login():
         return jsonify({'message': 'User does not exist.'}), 404
 
     if bcrypt.check_password_hash(user.password, password):
-        data = {'user': {'id': user.id}}
+        data = {'user': {'id': user.id, 'userType': user.userType}}
         auth_token = jwt.encode(data, app.secret_key, algorithm='HS256')
-        return jsonify({'message': 'Login successful', 'authToken': auth_token}), 200
+        return jsonify({'message': 'Login successful', 'authToken': auth_token, 'userType': user.userType}), 200
     else:
         return jsonify({'message': 'Incorrect password.'}), 401
 
